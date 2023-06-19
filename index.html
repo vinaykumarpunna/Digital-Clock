@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Clock</title>
+    <link rel="icon" type="image/x-icon" href="time.png">
+
+    <style>
+        @font-face {
+            font-family: Digital;
+            src: url('digital-7.ttf');
+        }
+
+        body {
+            font-family: Digital, sans-serif;
+            background: black;
+            color: red;
+        }
+
+        #clock {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-size: 120px;
+        }
+        
+        .padding{
+            padding-left: 2%;
+        }
+        
+        .half{
+            font-size: 50px;
+        }
+
+        @media (max-width: 600px) {
+            #clock{
+            font-size: 72px;
+        }
+        .half{
+            font-size: 30px;
+        }
+        }
+
+        @media (max-width: 376px) {
+            #clock{
+            font-size: 60px;
+        }
+        .half{
+            font-size: 25px;
+        }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="clock">
+        <div id="hours" class="padding"></div>
+        <span class="padding">:</span>
+        <div id="minutes"  class="padding"></div>
+        <span class="padding">:</span>
+        <div id="seconds" class="padding"></div>
+        <div class="half padding">
+            <div id="AmPm">AM</div>
+            <div id="day"></div>
+        </div>
+    </div>
+</body>
+<script>
+    function Dt() {
+    let hours = document.getElementById('hours');
+    let minutes = document.getElementById('minutes');
+    let seconds = document.getElementById('seconds');
+    let AMPM = document.getElementById('AmPm');
+    let day = document.getElementById('day');
+
+    let Hrs = new Date().getHours();
+    let Mins = new Date().getMinutes();
+    let Secs = new Date().getSeconds();
+    let Dys = new Date().getDay();
+
+    let D = ["Sun", "Mon", "Tue", "Wed", "thu", "fri", "sat"];
+
+    // we can also use if-else condition here, switch case like here. But we have used simple function at last see it
+    // And we can also use day.innerHTML = D[new Date().getDay()]; or D[Dys];
+
+    // switch (Dys) {
+    //     case 0:
+    //         day.innerHTML = D[0];
+    //         break;
+
+    //     case 1:
+    //         day.innerHTML = D[1];
+    //         break;
+
+    //     case 2:
+    //         day.innerHTML = D[2];
+    //         break;
+
+    //     case 4:
+    //         day.innerHTML = D[4];
+    //         break;
+
+    //     case 3:
+    //         day.innerHTML = D[3];
+    //         break;
+
+    //     case 5: day.innerHTML = D[5];
+    //         break;
+
+
+    //     default: day.innerHTML = D[6];
+    //         break;
+    // }
+
+    if (Hrs > 11) {
+        AMPM.innerHTML = "PM";
+    }
+    if (Hrs == 0) {
+        Hrs = 12;    //we can also write Hrs = Hrs + 12; because at this point Hrs=0
+    }
+
+    if (Hrs > 12) {
+        Hrs = Hrs - 12
+    }
+
+    // Hrs = (Hrs < 10) ? "0" + Hrs : Hrs; // we can also write like this.
+    if (Hrs < 10) {
+        Hrs = "0" + Hrs;
+    }
+
+    if (Mins < 10) {
+        Mins = "0" + Mins;
+    }
+
+    if (Secs < 10) {
+        Secs = "0" + Secs;
+    }
+
+    hours.innerHTML = Hrs;
+    minutes.innerHTML = Mins;
+    seconds.innerHTML = Secs;
+    day.innerHTML = D[Dys]
+}
+Dt();
+setInterval(Dt,1000)
+</script>
+
+</html>
