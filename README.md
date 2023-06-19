@@ -1,2 +1,2 @@
 # digital-clock
-This shows current local time in India.
+This shows current local time.
